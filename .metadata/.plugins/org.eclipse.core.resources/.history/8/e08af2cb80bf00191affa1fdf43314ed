@@ -1,0 +1,23 @@
+
+public class Fibonacci {
+
+	public static long fibonacci(int n) {
+		
+	
+		
+		if( n <= 1) {
+			return 1;
+		}else {
+			return fibonacci(n-1) + fibonacci(n-2);
+		}	
+	}
+	
+
+	public static void main(String[] args) {
+		long ini = System.nanoTime();
+		System.out.println(fibonacci(4));
+		long fin = System.nanoTime();
+		long duracion =  fin - ini;
+		System.out.println("Tardo:" + duracion / 1000000000.0 + " seg");
+	}
+}

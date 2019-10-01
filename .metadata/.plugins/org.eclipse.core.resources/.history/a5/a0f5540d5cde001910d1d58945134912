@@ -1,0 +1,37 @@
+
+public class Pruebas {
+	private String expresionInfija;
+
+	public Pruebas(String expresionInfija) {
+		//super();
+		this.expresionInfija = expresionInfija;
+	}
+
+
+
+	public void setExpresionInfija(String expresionInfija) {
+		this.expresionInfija = expresionInfija;
+	}
+	
+/*
+	public String expresionPostfijo() {
+		
+		
+		
+		
+		
+	}
+	*/
+	
+	//----------------------------------------------------------------------------
+	
+	public String[] array(String expresionInfija) {
+		String[] infija = expresionInfija.split(" ");
+		return infija;
+	}
+	
+	public static void main(String[] args) {
+		Pruebas 
+	}
+
+}

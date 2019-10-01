@@ -1,0 +1,16 @@
+
+public class Pruebas {
+	 public static void main(String[] args) {
+		 String cadena = "Esto es una prueba.";
+	     String[] palabras = cadena.split(" ");
+	     
+	     for (String palabra : palabras)
+	     {
+	         System.out.println(palabra);
+	     }
+	}
+    
+}
+
+
+

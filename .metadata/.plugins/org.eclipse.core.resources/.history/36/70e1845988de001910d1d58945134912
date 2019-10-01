@@ -1,0 +1,160 @@
+import java.util.Stack;
+public class EvaluarExpresion {
+	private String expresionInfija;
+
+	public EvaluarExpresion(String expresionInfija) {                               //CONSTRUCTOR
+		//super();
+		this.expresionInfija = expresionInfija;
+	}
+
+
+	public void setExpresionInfija(String expresionInfija) {                         //SETTER 
+		this.expresionInfija = expresionInfija;
+	}
+	/*
+	public double evaluaExpresion() {
+		
+	}
+	
+
+	*/
+	public String expresionPostfijo(String expresionInfija) {
+		String[] infija = expresionInfija.split(" ");
+		String[] resultado = new String[infija.length];
+		Stack < String > pila = new Stack < String > ();
+		int pos = -1;
+		
+		for(int i=0; i< infija.length; i++) {
+			
+			if(infija[i].equals("+") || infija[i].equals("-") || infija[i].equals("*") || infija[i].equals("/") || infija[i].equals("^") || infija[i].equals( "(") || infija[i].equals( ")") ){
+				
+				if(pila.empty() ) {
+					pila.push(infija[i]);
+				
+				}else {
+					int signo_actual = jerarquia(infija[i]);
+					int signo_pila;
+					
+					if(pila.peek().equals("+") || pila.peek().equals("-")) {
+						System.out.println("Entrooooo +");
+						signo_pila = 2;
+						
+						if(signo_actual <= signo_pila) {
+							while(pila.empty() == false) {
+								if(!pila.peek().equals("(")) {
+									pos += 1;
+									resultado[pos] = pila.pop();
+								}			
+							}
+							pila.push(infija[i]);
+							
+						}else {
+							pila.push(infija[i]);
+						}
+					}
+					
+					else if(pila.peek().equals("*") || pila.peek().equals("/")) {
+						signo_pila = 3;
+						System.out.println("Entrooooo *");
+						if(signo_actual <= signo_pila) {
+							while(pila.empty() == false) {
+								if(!pila.peek().equals("(")) {
+									pos += 1;
+									resultado[pos] = pila.pop();
+								}
+							}
+							pila.push(infija[i]);
+						}else {
+							pila.push(infija[i]);
+						}
+					}
+					
+					else if(pila.peek().equals("^") ) {
+						signo_pila = 4;
+						
+						if(signo_actual <= signo_pila) {
+							while(pila.empty() == false) {
+								if(!pila.peek().equals("(")) {
+									pos += 1;
+									resultado[pos] = pila.pop();
+								}
+							}
+							pila.push(infija[i]);
+						}else {
+							pila.push(infija[i]);
+						}
+					}
+					else if(pila.peek().equals("(")){
+						System.out.println("Entrooooo (");
+						signo_pila = 1;
+						if(signo_actual <= signo_pila) {
+							pila.push(infija[i]);
+						}
+						pila.push(infija[i]);
+						
+					}
+					else if(pila.peek().equals(")") ){
+						while(!pila.peek().equals("(")) {
+							if(pila.peek().equals("(")) {
+								pila.pop();
+								break;
+							}
+							pos += 1;
+							resultado[pos] = pila.pop();
+						}
+						
+					}
+				}	
+			}
+			else {
+				System.out.println("Entrooooo num");
+				pos += 1;
+				resultado[pos] = infija[i];
+			}		
+		
+	}//for end
+		
+		while(pila.empty() == false) {
+			pos += 1;
+			resultado[pos] = pila.pop();
+		}
+		
+		String res = "";
+		for(int i=0; i<resultado.length;i++) {
+			res = res + resultado[i] + " ";
+		}
+		
+		
+		return res;
+	}
+	
+	 public static int jerarquia(String elemento) {
+	        int jer = 0;
+	        switch (elemento) {
+	        case ")":
+	            jer = 5; break;
+	        case "^":
+	            jer = 4; break;
+	        case "*": case "/":
+	            jer = 3; break;
+	        case "+": case "-":
+	            jer = 2; break;
+	        case "(":
+	            jer = 1; break;
+	        }
+	        return jer;
+	    }
+	
+	//----------------------------------------------------------------------------
+	
+	
+	
+	public static void main(String[] args) {
+		String expresion = "( 5 + 10 * 2 - 3 / 4 ) * ( 10 + 20 / 2 )";
+		EvaluarExpresion e = new EvaluarExpresion(expresion);
+		String resultado = e.expresionPostfijo(expresion);
+		System.out.println(resultado);
+
+		
+	}
+}

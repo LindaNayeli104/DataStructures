@@ -1,0 +1,117 @@
+
+import java.util.Scanner;
+import java.util.Stack;
+ 
+/**
+ *
+ * @author Administrador
+ */
+public class Pruebas {
+ 
+	 public static String[] array(String expresionInfija) {
+  		String[] infija = expresionInfija.split(" ");
+  		return infija;
+  	}
+	 
+	 
+    public static void main(String[] args) {
+         
+         System.out.println("*Escribe una expresión algebraica:");
+  
+        
+ String[] arrayInfix = array("10 +20 * ( 50 / 2 ) - 5.8");
+  
+//Declaración de las pilas
+  
+ Stack < String > E = new Stack < String > ();
+ //Pilaentrada
+  
+ Stack < String > P = new Stack < String > ();
+ //Pilatemporal para operadores
+  
+ Stack < String > S = new Stack < String > ();
+ //Pilasalida
+  
+//Añadir la array a la Pila de entrada (E)
+  
+  for (int i = arrayInfix.length - 1; i >= 0; i--) {
+  
+    E.push(arrayInfix[i]);
+  
+        }try {
+  
+//Algoritmo Infijo a Postfijo
+  
+  while (!E.isEmpty()) {
+  
+ switch (signo(E.peek())){
+  
+    case 1:
+  
+        P.push(E.pop());
+  
+ break;
+ 
+case 4:
+  
+ while(signo(P.peek()) >= signo(E.peek())) {
+  
+        S.push(P.pop());
+  
+        }
+  
+        P.push(E.pop());
+  
+    break;case 2:
+  
+ while(!P.peek().equals("(")) {
+  
+S.push(P.pop());
+  
+}
+  
+P.pop();
+  
+E.pop();
+  
+ break;default:
+  
+S.push(E.pop());}
+  
+}
+
+  
+//Mostrar resultados:
+  
+
+  
+}catch(Exception ex){System.out.println("Error en la expresión algebraica");
+  
+System.err.println(ex);
+  
+}
+  
+}
+  
+//Jerarquia de los operadores
+  
+private static int signo(String op) {
+  
+int prf = 99;
+  
+if (op.equals("^")) prf = 5;
+  
+if (op.equals("*") || op.equals("/")) prf = 4;
+  
+if (op.equals("+") || op.equals("-")) prf = 3;
+  
+ if (op.equals(")")) prf = 2;
+  
+if (op.equals("(")) prf = 1;
+  
+return prf;
+        // TODO code application logic here
+    }
+     
+}
+ 

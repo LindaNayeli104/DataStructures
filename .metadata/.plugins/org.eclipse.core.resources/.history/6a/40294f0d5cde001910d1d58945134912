@@ -1,0 +1,44 @@
+
+public class EvaluarExpresion {
+	private String expresionInfija;
+
+	public EvaluarExpresion(String expresionInfija) {                               //CONSTRUCTOR
+		//super();
+		this.expresionInfija = expresionInfija;
+	}
+
+
+
+	public void setExpresionInfija(String expresionInfija) {                         //SETTER 
+		this.expresionInfija = expresionInfija;
+	}
+	/*
+	public double evaluaExpresion() {
+		
+	}
+	
+
+	
+	public String expresionPostfijo() {
+		
+			
+		
+	}
+	*/
+	//----------------------------------------------------------------------------
+	
+	public String[] array(String expresionInfija) {
+		String[] infija = expresionInfija.split(" ");
+		return infija;
+	}
+	
+	public static void main(String[] args) {
+		String expresion = "10 + 20 * ( 50 / 2 ) - 5.8";
+		EvaluarExpresion e = new EvaluarExpresion(expresion);
+		String[] extraccion = e.array(expresion);
+		for(String elemento:extraccion ) {
+			System.out.println(elemento);
+		}
+		
+	}
+}

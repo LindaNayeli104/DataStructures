@@ -1,0 +1,59 @@
+
+public class StarsDown {
+	
+	public static void estrellas(int num) {
+
+		    // base case 
+		    if (num == 0) 
+		        return; 
+		    System.out.print ("* "); 
+		  
+		    // recursively calling printn() 
+		    estrellas(num - 1); 
+		} 
+		  
+		// function to print the pattern 
+		static void prueba(int n, int i){ 
+		    // base case 
+		    if (n == 0) {
+		        return; 
+		    }else {
+		    estrellas(i); 
+		    System.out.println(); 
+		  
+		    // recursively calling pattern() 
+		    prueba(n - 1, i + 1); 
+		    }
+		}
+		    
+		    public static void main (String[] args){ 
+		      
+		        int n = 5; 
+		        prueba(n, 1); 
+		    } 
+		
+}
+
+	
+	/*
+	 * 	String res= "*";
+		if(num=1) {
+			System.out.println("x");
+		}else {
+			res = estrellas(num-1) + "*";
+			System.out.println(res);
+			}
+		}
+		
+		
+		
+		public static String prepara(int num) {
+			
+		}
+			
+		public static void main(String[] args) {
+			estrellas(4);
+		}
+		*/
+	 */
+

@@ -1,0 +1,17 @@
+
+public class MaximoRecursivo {
+
+	public static int MaxRec(int[] lista, int pos) {
+		if(lista[pos] < MaxRec(lista, pos+1)) {
+			return lista[pos+1];
+		}else {
+			return MaxRec(lista, pos+1);
+		}
+	}	
+	
+	
+	public static void main(String[] args) {
+		int[] lista = {5,8,9,5,265,64,1};
+		System.out.println(MaxRec(lista, 0));
+	}
+}

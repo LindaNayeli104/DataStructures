@@ -1,0 +1,31 @@
+
+public class EvaluarExpresion {
+	private String expresionInfija;
+
+	public EvaluarExpresion(String expresionInfija) {
+		//super();
+		this.expresionInfija = expresionInfija;
+	}
+
+
+
+	public void setExpresionInfija(String expresionInfija) {
+		this.expresionInfija = expresionInfija;
+	}
+	
+	public double evaluaExpresion() {
+		
+	}
+	
+
+	
+	public String expresionPostfijo() {
+		
+	}
+	
+	//----------------------------------------------------------------------------
+	
+	public String[] array(String expresionInfija) {
+		String[] infija = expresionInfija.split(" ");
+	}
+}

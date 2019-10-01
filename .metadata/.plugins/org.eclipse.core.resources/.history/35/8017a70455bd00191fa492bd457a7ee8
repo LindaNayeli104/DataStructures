@@ -1,0 +1,25 @@
+
+public class Pruebas{
+	
+	
+	static void metodoA(char x) {
+		
+		if (x >= 'A') {
+			System.out.println(x);
+			metodoB(x);
+			//System.out.println(x);
+		}
+	}
+	
+	
+	static void metodoB(char x) {
+		metodoA(--x);	
+		
+	}
+	
+
+	public static void main(String[] args) {
+		char x = 'Z';
+		metodoA(x);
+	}
+}

@@ -1,0 +1,38 @@
+
+public class EstrellaReverso {
+
+	public static void puente(int altura){
+    	int paro = 0;
+        if (paro >= altura){
+            return;   
+        }
+            System.out.print("*");
+            imprime(altura);
+            System.out.println();
+            puente(altura+1);
+
+            imprime(altura+1);    //RETURN VALUES
+            System.out.println();
+    }
+	
+	public static void imprime(int estrella){
+		int paro = 0;
+        if (paro >= estrella){
+            return;
+        }
+        paro++;
+        System.out.print("*");
+        imprime(estrella);
+    }
+
+
+    
+
+
+
+
+    public static void main (String args[] ){
+       puente(4);
+    }
+	
+}

@@ -1,0 +1,85 @@
+import java.awt.Graphics;
+import java.awt.Point;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+public class YaMeHiceBolas extends JFrame{
+
+	private int x1,
+				y1,
+				largo,
+				nivel,
+				nivel_actual;
+	
+	public YaMeHiceBolas() {
+		super("Fractal YaMeHiceBolas");
+		this.setSize(720,700);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.x1 =  50;                                   
+		this.y1 = 350;                                     
+		this.largo = 600;
+		this.nivel = 1;          //Integer.parseInt(JOptionPane.showInputDialog("Introduce el nivel de profundidad"));
+		this.setVisible(true);
+		
+	}
+	/*
+	public int puntoMedio(x1, y1) {
+		int xM = (x1 + y1) / 2,
+			yM = (x1 + b.y) / 2;
+		return xM, yM;
+
+	}
+	
+	*/
+	public void paint(Graphics g) {
+		super.paint(g);
+		this.pintaCirculos(g, nivel, x1, y1, largo);
+	}
+
+	/*
+	public void preparacion(int nivel, int x1, int y1, int largo) {
+		xM, yM = puntoMedio(x1, y1);
+		
+		
+		
+	}
+	
+		g.drawOval(x1, y1-largo/4, largo/2, largo/2);
+		g.drawOval(x1+largo/2, y1-largo/4, largo/2, largo/2);
+		
+	 */
+	
+	public void pintaCirculos(Graphics g, int nivel, int x1, int y1, int largo) {    //Recursividad basica pero grafica
+		
+
+	    
+		
+		g.drawOval(x1, y1-largo/2, largo, largo);
+		
+	    g.drawOval(x1, y1-largo/4, largo/2, largo/2);
+		g.drawOval(x1+largo/2, y1-largo/4, largo/2, largo/2);
+		
+		g.drawOval(x1, y1-largo/8, largo/4, largo/4);
+		g.drawOval(x1+largo/4, y1-largo/8, largo/4, largo/4);
+		g.drawOval(x1+largo/2, y1-largo/8, largo/4, largo/4);
+		g.drawOval(x1+largo/4*3, y1-largo/8, largo/4, largo/4);
+		
+		/*if(nivel == 0) {
+			g.drawOval(x1, y1-largo/2, largo, largo);
+		}else {
+			
+		}
+		*/
+		
+	}
+	
+
+	
+	public static void main(String[] args) {
+		YaMeHiceBolas fractal =  new YaMeHiceBolas();
+	}
+	
+	
+	
+}
