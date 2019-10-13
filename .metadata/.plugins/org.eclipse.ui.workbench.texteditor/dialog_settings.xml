@@ -2,29 +2,34 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="" key="selection"/>
+		<item value="preorden" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="preorden"/>
+			<item value="System"/>
+			<item value="del"/>
+			<item value="suc"/>
+			<item value="aux"/>
+			<item value="preorder"/>
+			<item value="My"/>
+			<item value="add"/>
+			<item value="Integer"/>
+			<item value="try"/>
+			<item value="getFirst"/>
 			<item value="entro"/>
 			<item value="pop"/>
-			<item value="System"/>
 			<item value="data"/>
 			<item value="position"/>
-			<item value="main"/>
-			<item value="try"/>
-			<item value="node"/>
-			<item value="previous"/>
-			<item value="current"/>
-			<item value="head"/>
-			<item value="A"/>
-			<item value="der"/>
-			<item value="izq"/>
-			<item value="v"/>
 		</list>
 		<list key="replacehistory">
+			<item value="extra"/>
+			<item value="aux"/>
+			<item value="sucesor"/>
+			<item value="Sucesor"/>
+			<item value="int"/>
 			<item value="dato"/>
 			<item value="pos"/>
 			<item value="nodo"/>

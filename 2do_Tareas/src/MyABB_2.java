@@ -5,20 +5,18 @@
  Comentarios:Se me dificultó mucho hacer la eliminacion del nodo con dos hijos.
  */
 
-import java.util.LinkedList;
 import java.util.NoSuchElementException;
-import java.util.Queue;
 
-public class Pruebas <E extends Comparable<E>>{   //Se parametriza con         <E> extends Comparable
-	private NodoABB<E> root;
+public class MyABB_2 <E extends Comparable<E>>{   //Se parametriza con         <E> extends Comparable
+	private NodoABB2<E> root;
 	private int size;
 	
-	public Pruebas() {
+	public MyABB_2() {
 		super();
 	}
 	
 	public E search(E value) {
-		NodoABB<E> current =  this.root;
+		NodoABB2<E> current =  this.root;
 		
 		while(current != null) {
 			
@@ -38,9 +36,9 @@ public class Pruebas <E extends Comparable<E>>{   //Se parametriza con         <
 	
 	public void insert(E value) {                                 
 		
-		NodoABB<E> current =  this.root;
-		NodoABB<E> current_prev = null;
-		NodoABB<E> nodo_new =  new NodoABB(value);
+		NodoABB2<E> current =  this.root;
+		NodoABB2<E> current_prev = null;
+		NodoABB2<E> nodo_new =  new NodoABB2(value);
 		
 		if(current == null) {
 			this.root = nodo_new;              
@@ -76,7 +74,7 @@ public class Pruebas <E extends Comparable<E>>{   //Se parametriza con         <
 		preorden(this.root);
 	}
 
-	public void preorden(NodoABB<E> current) {   //Funcion recorsiva   -> Recibir como parametro un nodo
+	public void preorden(NodoABB2<E> current) {   //Funcion recorsiva   -> Recibir como parametro un nodo
 		if(current != null) {
 			System.out.println(current.value + ", ");
 			preorden(current.left);
@@ -84,11 +82,11 @@ public class Pruebas <E extends Comparable<E>>{   //Se parametriza con         <
 		}
 	}
 	
-	public void inorden() {
+	public void inorden(E value) {
 		inorden(this.root);
 	}
 	
-	public void inorden(NodoABB<E> current) { 
+	public void inorden(NodoABB2<E> current) { 
 		if(current != null) {
 			inorden(current.left);
 			System.out.println(current.value + ", ");
@@ -96,11 +94,11 @@ public class Pruebas <E extends Comparable<E>>{   //Se parametriza con         <
 		}
 	}
 
-	public void postorden() {
+	public void postorden(E value) {
 		postorden(this.root);
 	}
 	
-	public void postorden(NodoABB<E> current) { 
+	public void postorden(NodoABB2<E> current) { 
 		if(current != null) {
 			postorden(current.left);
 			postorden(current.right);
@@ -108,43 +106,16 @@ public class Pruebas <E extends Comparable<E>>{   //Se parametriza con         <
 		}
 	}
 	
-	
-	
-//-----------------------------------------------------------------------------------------------------------------------------------------------NIVEL
-	public void nivel() {
-		Queue<NodoABB> cola=new LinkedList();
-		nivel(this.root, cola);
+	public void nivel(E value) {
+		nivel(this.root);
 	}
 	
-	public void nivel(NodoABB<E> current, Queue<NodoABB> cola) {    //Usar cola de java     Imprime separados por ","
-		if(current != null) {
-			System.out.println(current.value + ", ");
-			try {
-				if(!current.left.equals(null)) {
-					cola.add(current.left);
-				}
-			}catch(NullPointerException ex) {
-				
-			}
-			try {
-				if(!current.right.equals(null)) {
-					cola.add(current.right);
-				}
-			}catch(NullPointerException ex) {
-				
-			}
-			try {
-				if (!cola.peek().equals(null)) {
-					nivel(cola.poll(), cola);
-				}
-			}catch(NullPointerException ex) {
-			
-			}
-		}
+	public void nivel(NodoABB2<E> current) {    //Usar cola de java     Imprime separados por ","
+		
 	}
-//-----------------------------------------------------------------------------------------------------------------------------------------------REMOVE
+	
 	public E remove(E value) {                        //3 casos con casoso especiales              cuidar size
-		NodoABB<E> current =  this.root,
+		NodoABB2<E> current =  this.root,
 				   parent = null;
 		try {
 			while(!current.value.equals(value)) {
@@ -160,15 +131,10 @@ public class Pruebas <E extends Comparable<E>>{   //Se parametriza con         <
 				}else {
 					parent.right = null;
 				}
-				this.size--;
 				return current.value;
 			}
 	   //----------------------------------------------------------------Borrar una un nodo con 1 hijo
 			else if((current.left != null && current.right == null) || (current.left == null && current.right != null)) {
-				
-				System.out.println("parent: " + parent.value);
-				System.out.println("current: " + current.value);
-				
 				if(parent.left == current && current.left == null) {
 					parent.left = current.right;
 					//System.out.println("-----" + parent.right.value);
@@ -177,83 +143,113 @@ public class Pruebas <E extends Comparable<E>>{   //Se parametriza con         <
 					parent.left = current.left;
 					
 				}
-				else if(parent.right == current && current.left == null) {   //***
-					parent.right = current.right;
-					System.out.println("parent.left: " + parent.left.value);
+				else if(parent.right == current && current.left == null) {
+					parent.left = current.right;
 
 				}
 				else if(parent.right == current && current.right == null) {
-					parent.right = current.left;
+					parent.left = current.left;
 					
 				}
-				this.size--;
 				return current.value;
 			}
 			
 	   //----------------------------------------------------------------Borrar un nodo con 2 hijos
 			else if(current.left != null && current.right != null) {
-				this.size++;
-				E res = current.value;
-				NodoABB<E> sucesor =  current.right;
+				NodoABB2<E> sucesor=  current.right;
 				
 				while(sucesor.left != null) {
 					sucesor = sucesor.left;
 				}
-		
-				this.remove(sucesor.value);
-				current.value = sucesor.value;
-				this.size--;
-				return res;
-			}
+				
+				NodoABB2<E> aux=   new NodoABB2<E>(sucesor.value, current.left, current.right);
+				
+				
+				if(current.value.compareTo(parent.value)<0) {
+					parent.left = aux;
+				}else if(current.value.compareTo(parent.value)>0) {
+					parent.right = aux;
+				}
+	//------------------------------------------------------------------------------------------PARTE NUEVA     
+				
+				if(current.value.compareTo(parent.value)<0) {
+					parent = sucesor.;
+				}else if(current.value.compareTo(parent.value)>0) {
+					parent.right = aux;
+				}
+				parent = sucesor.right;
+				while(!parent.left.value.equals(sucesor.value)) {
+					if() {
+						parent = parent.left;
+					}else {
+						num_sucesores += 1;
+					}
+					
+				}//while end
+				parent
+				if(current.value.compareTo(parent.value)>0) {
+					parent.right = aux;
+				}
+				//remove(sucesor.value);
+				/*
+				NodoABB2<E> remove_pos =   new NodoABB2<E>(current.right.value);
+				
+				System.out.println("current ini: " + current.value);
+				while(!current.left.equals(null) && !current.left.value.equals(sucesor.value)) {           //*****Checar
+					current = current.right;
+					System.out.println("current: " + current.value);
+				}
+				if(current.left.equals(sucesor.value) && !current.left.right.equals(null)) {
+					current.left = current.left.right;
+				}
+				else if(current.left.equals(sucesor.value) && !current.left.right.equals(null)) {
+					current.left = null;
+				}
+				
+				*/
 			
+			}
+				size--;
+				return current.value;
 		}catch(NullPointerException ex) {
 			throw new NoSuchElementException("No se encontró el valor " + value + " en el árbol");
-		
 		}
-		return value;
 	}
-		
 	
 	
-//------------------------------------------------------------------------------------------------*******************************************         MAIN	
+//---------------------------------------------------------------------------------------------------MAIN	
 	public static void main(String[] args) {
-		Pruebas<Integer> arbol = new Pruebas<>();
-		
+		MyABB_2<Integer> arbol = new MyABB_2<>();
+		 
 	
 		
    //------------------------------------------------	
-		
-		arbol.root = new NodoABB(21);
-		arbol.root.left = new NodoABB(13);
-		arbol.root.right = new NodoABB(33);
-		arbol.root.left.left = new NodoABB(10);
-		arbol.root.left.right = new NodoABB(18);
-		arbol.root.right.left = new NodoABB(25);
-		arbol.root.right.right = new NodoABB(40);
-		arbol.root.right.left.right= new NodoABB(27);
-		
-		arbol.root.right.right.right= new NodoABB(42);
 		/*
-		arbol.root.right.right.right.right= new NodoABB(45);
-		arbol.root.right.right.right.left= new NodoABB(41);
+		arbol.root = new NodoABB2(21);
+		arbol.root.left = new NodoABB2(13);
+		arbol.root.right = new NodoABB2(33);
+		arbol.root.left.left = new NodoABB2(10);
+		arbol.root.left.right = new NodoABB2(18);
+		arbol.root.right.left = new NodoABB2(25);
+		arbol.root.right.right = new NodoABB2(40);
+		arbol.root.right.left.right= new NodoABB2(27);
 		
-		arbol.root.right.right.right.right.right= new NodoABB(47);
-		arbol.root.right.right.right.right.left =  new NodoABB(43);
-		*/
+		arbol.root.right.right.right= new NodoABB2(42);
+		arbol.root.right.right.right.right= new NodoABB2(43);
+		arbol.root.right.right.right.left= new NodoABB2(41);
 		
-		arbol.size = 13;
-		System.out.println("NIVEL----------------------------------------------------------------------------------------------------------------");
-		arbol.nivel();
+		arbol.size = 11;
 		
+		arbol.preorden();
 		System.out.println("size:" +arbol.size);
 		System.out.println("---------------");
-		//System.out.println(arbol.remove(45));
+		System.out.println(arbol.remove(42));
 		
 		System.out.println("---------------");
-		//arbol.preorden();
+		arbol.preorden();
 		System.out.println("size" + arbol.size);
 		
-		
+		*/
 		
 //--------------------------------------------------------------
 		//System.out.println(arbol.search(60));
@@ -272,25 +268,25 @@ public class Pruebas <E extends Comparable<E>>{   //Se parametriza con         <
 		System.out.println(arbol.root.value);
 		*/
 		//-----------------------------------------------------------CASO 2
-		/*
-		arbol.root = new NodoABB(10);
-		arbol.root.left = new NodoABB(5);
-		arbol.root.right = new NodoABB(15);
-		arbol.root.left.left = new NodoABB(3);
-		arbol.root.left.right = new NodoABB(8);
-		arbol.root.left.right.left = new NodoABB(6);
-		arbol.root.left.right.right = new NodoABB(9);
-		arbol.root.left.right.left.right = new NodoABB(7);
+		
+		arbol.root = new NodoABB2(10);
+		arbol.root.left = new NodoABB2(5);
+		arbol.root.right = new NodoABB2(15);
+		arbol.root.left.left = new NodoABB2(3);
+		arbol.root.left.right = new NodoABB2(8);
+		arbol.root.left.right.left = new NodoABB2(6);
+		arbol.root.left.right.right = new NodoABB2(9);
+		arbol.root.left.right.left.right = new NodoABB2(7);
 		
 		
 		
-		arbol.root.right.left = new NodoABB(12);
-		arbol.root.right.right = new NodoABB(20);
-		arbol.root.right.right.right = new NodoABB(30);
+		arbol.root.right.left = new NodoABB2(12);
+		arbol.root.right.right = new NodoABB2(20);
+		arbol.root.right.right.right = new NodoABB2(30);
 		
 		arbol.size = 11;
 		
-		arbol.preorden();
+		//arbol.preorden();
 		System.out.println("size:" +arbol.size);
 		System.out.println("---------------");
 		System.out.println(arbol.remove(5));
@@ -298,27 +294,27 @@ public class Pruebas <E extends Comparable<E>>{   //Se parametriza con         <
 		System.out.println("---------------");
 		arbol.preorden();
 		System.out.println("size" + arbol.size);
-		*/
+		
 	//---------------------------------------------------	
 	}
 	
 	
 }
 
-//-------------------------------------------------------------------------------------------------------------------NodoABB
-class NodoABB <E extends Comparable<E>>{
-	E value;
-	NodoABB<E> left,
+//-------------------------------------------------------------------------------------------------------------------NodoABB2
+class NodoABB2 <E extends Comparable<E>>{
+	final E value;
+	NodoABB2<E> left,
 			   right;
 	
 	
-	public NodoABB(E value) {
+	public NodoABB2(E value) {
 		super();
 		this.value = value;
 	}
 	
 	
-	public NodoABB(E value, NodoABB<E> left, NodoABB<E> right) {
+	public NodoABB2(E value, NodoABB2<E> left, NodoABB2<E> right) {
 		this.value = value;
 		this.left = left;
 		this.right = right;
@@ -330,16 +326,16 @@ class NodoABB <E extends Comparable<E>>{
 	}
 	
 	
-	public NodoABB<E> getLeft() {
+	public NodoABB2<E> getLeft() {
 		return left;
 	}
-	public void setLeft(NodoABB<E> left) {
+	public void setLeft(NodoABB2<E> left) {
 		this.left = left;
 	}
-	public NodoABB<E> getRight() {
+	public NodoABB2<E> getRight() {
 		return right;
 	}
-	public void setRight(NodoABB<E> right) {
+	public void setRight(NodoABB2<E> right) {
 		this.right = right;
 	}
 	
@@ -348,3 +344,4 @@ class NodoABB <E extends Comparable<E>>{
 
 //Operadores ternarios siempre regresa algo
 //If    no siempre regresa algo
+

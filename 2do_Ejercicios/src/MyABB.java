@@ -9,11 +9,11 @@ import java.util.LinkedList;
 import java.util.NoSuchElementException;
 import java.util.Queue;
 
-public class Pruebas <E extends Comparable<E>>{   //Se parametriza con         <E> extends Comparable
+public class MyABB <E extends Comparable<E>>{   //Se parametriza con         <E> extends Comparable
 	private NodoABB<E> root;
 	private int size;
 	
-	public Pruebas() {
+	public MyABB() {
 		super();
 	}
 	
@@ -217,12 +217,12 @@ public class Pruebas <E extends Comparable<E>>{   //Se parametriza con         <
 	
 //------------------------------------------------------------------------------------------------*******************************************         MAIN	
 	public static void main(String[] args) {
-		Pruebas<Integer> arbol = new Pruebas<>();
+		MyABB<Integer> arbol = new MyABB<>();
 		
 	
 		
    //------------------------------------------------	
-		
+		/*
 		arbol.root = new NodoABB(21);
 		arbol.root.left = new NodoABB(13);
 		arbol.root.right = new NodoABB(33);
@@ -233,13 +233,13 @@ public class Pruebas <E extends Comparable<E>>{   //Se parametriza con         <
 		arbol.root.right.left.right= new NodoABB(27);
 		
 		arbol.root.right.right.right= new NodoABB(42);
-		/*
+		
 		arbol.root.right.right.right.right= new NodoABB(45);
 		arbol.root.right.right.right.left= new NodoABB(41);
 		
 		arbol.root.right.right.right.right.right= new NodoABB(47);
 		arbol.root.right.right.right.right.left =  new NodoABB(43);
-		*/
+	
 		
 		arbol.size = 13;
 		System.out.println("NIVEL----------------------------------------------------------------------------------------------------------------");
@@ -253,7 +253,7 @@ public class Pruebas <E extends Comparable<E>>{   //Se parametriza con         <
 		//arbol.preorden();
 		System.out.println("size" + arbol.size);
 		
-		
+		*/
 		
 //--------------------------------------------------------------
 		//System.out.println(arbol.search(60));
@@ -272,7 +272,7 @@ public class Pruebas <E extends Comparable<E>>{   //Se parametriza con         <
 		System.out.println(arbol.root.value);
 		*/
 		//-----------------------------------------------------------CASO 2
-		/*
+		
 		arbol.root = new NodoABB(10);
 		arbol.root.left = new NodoABB(5);
 		arbol.root.right = new NodoABB(15);
@@ -289,7 +289,10 @@ public class Pruebas <E extends Comparable<E>>{   //Se parametriza con         <
 		arbol.root.right.right.right = new NodoABB(30);
 		
 		arbol.size = 11;
-		
+		arbol.nivel();
+		System.out.println(arbol.remove(5));
+		arbol.nivel();
+		/*
 		arbol.preorden();
 		System.out.println("size:" +arbol.size);
 		System.out.println("---------------");
